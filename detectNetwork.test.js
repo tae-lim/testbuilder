@@ -41,6 +41,7 @@ var FILL_ME_IN = 'Fill this value in';
 //     }
 //   });
 // });
+
 describe('Diner\'s Club', function() {
   // Be careful, tests can have bugs too...
 
@@ -119,7 +120,6 @@ describe('MasterCard', function() {
     expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
   });
  
-
   // You can also use should instead of expect, which changes the style
   // slightly. It really doesn't matter which one you use - check out 
   // http://chaijs.com/guide/styles/ for more info, but it's important
@@ -127,7 +127,6 @@ describe('MasterCard', function() {
   // and should, but that's just for learning), so once you've gotten 
   // these tests to pass using should syntax, refactor your tests to 
   // use either expect or should, but not both. 
-  var expect = chai.expect;
   
   it('has a prefix of 54 and a length of 16', function() {
     expect(detectNetwork('5412345678901234')).to.equal('MasterCard');
@@ -173,8 +172,6 @@ describe('Discover', function() {
   });
 
 });
-
-
 
 describe('Maestro', function() {
   // Write full test coverage for the Maestro card
@@ -222,5 +219,44 @@ describe('Maestro', function() {
   
 });
 
-describe('should support China UnionPay')
+describe('China UnionPay', function () {
+  var expect = chai.expect;
+
+  var numbers = '7890123456';
+  for (var length = 16; length <= 19; length++) {
+    for (var prefix = 622126; prefix <= 622925; prefix++) {
+      (function(length, numbers, prefix) {
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+          expect(detectNetwork(prefix + numbers)).to.equal('China UnionPay');
+        });
+      })(length, numbers, prefix)
+    }
+    numbers = numbers + '0';
+  }
+
+  var numbers = '4567890123456';
+  for (var length = 16; length <= 19; length++) {
+    for (var prefix = 624; prefix <= 626; prefix++) {
+      (function(length, numbers, prefix) {
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+          expect(detectNetwork(prefix + numbers)).to.equal('China UnionPay');
+        });
+      })(length, numbers, prefix)
+    }
+    numbers = numbers + '0';
+  }
+
+  var numbers = '567890123456';
+  for (var length = 16; length <= 19; length++) {
+    for (var prefix = 6282; prefix <= 6288; prefix++) {
+      (function(length, numbers, prefix) {
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+          expect(detectNetwork(prefix + numbers)).to.equal('China UnionPay');
+        });
+      })(length, numbers, prefix)
+    }
+    numbers = numbers + '0';
+  }
+
+});
 describe('should support Switch')

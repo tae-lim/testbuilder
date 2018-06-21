@@ -13,6 +13,9 @@ var detectNetwork = function(cardNumber) {
   if (length === 15 && (prefix2 === '34' || prefix2 === '37')) {
   	return 'American Express';
   }
+  if ((length >= 16 && length <= 19) && (prefix4 === '4903' || prefix4 === '4905' || prefix4 === '4911' || prefix4 === '4936' || prefix6 === '564182' || prefix6 === '633110' || prefix4 === '6333' || prefix4 === '6759')) {
+  	return 'Switch';
+  }
   if ((length === 13 || length === 16 || length === 19) && prefix1 === '4') {
   	return 'Visa';
   }
